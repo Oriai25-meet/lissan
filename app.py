@@ -37,7 +37,7 @@ def signup():
 		full_name = request.form['full_name']
 		login_session['user'] = auth.create_user_with_email_and_password(email, password)
 		user_id = login_session['user']['localId']
-		db.child("users").child(user_id).set(user)
+		#db.child("users").child(user_id).set(user)
 		return redirect(url_for('home'))
 
 
@@ -52,7 +52,10 @@ def signin():
 	else:
 		return render_template("signin2.html")
 
-
+@app.route('/home',methods = ["GET","POST"])
+def home():
+	if request.method=="GET":
+		return render_template("index.html")
 
 
 if __name__ == '__main__':
