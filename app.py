@@ -44,6 +44,8 @@ def signup():
 @app.route("/signin",methods = ["GET","POST"])
 def signin():
 	if request.method=="POST":
+		full_name = request.form['full_name']
+
 		email = request.form['email']
 		password = request.form['password']
 		login_session['user'] = auth.sign_in_with_email_and_password(email, password)
@@ -63,18 +65,21 @@ def donate():
 	if request.method=="GET":
 		return render_template("donate.html")
 	else:
-		full_name = request.form['full_name']
 		donate = request.form['donate']
-		dis = request.form['dis']
-		user = {'full_name':full_name, 'donate':donate}
+		login_session['donate'] = donate
+		#dis = request.form['dis']
+		user = {'full_name':"f", 'donate':donate}
+		user_id = login_session['user']['localId']
+
 		db.child("users").child(user_id).set(user)
 		
 		return redirect(url_for('bar'))
 
 @app .route('/bar')
 def bar():
-	real_donate = db.child('donates').get().val()
-	db.child('donates').set(real_donate+donate)
+	real_donate = int(db.child('donates').get().val())
+	total = real_donate + int(login_session['donate'])
+	db.child('donates').set(total)
 	bar_donate = db.child('donates').get().val()
 	return render_template('bar.html',bar_donate = bar_donate)
 
