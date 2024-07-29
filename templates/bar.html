@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Bar</title>
+    <p id  = 'money' hidden>{{bar_donate}}</p>
+    <style>
+      body {
+        padding: 50px;  
+      }
+
+      .progress-bg {
+        margin: 0 auto;
+        width: 65%;
+        height: 78px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: inset 0 0 10px #ccc;
+      }
+
+      .progress-bar {
+        height: 78px;
+        border-radius: 10px;
+        float: left;
+        width: 0%; /* Start at 0% to allow dynamic updates */
+        background-color: #1c314a; 
+        background: -webkit-linear-gradient(top, #1c314a, #27425f);
+        background: -moz-linear-gradient(top, #1c314a, #27425f);
+        background: -ms-linear-gradient(top, #1c314a, #27425f);
+        background: -o-linear-gradient(top, #1c314a, #27425f);
+        background: linear-gradient(to bottom, #1c314a, #27425f);
+        transition: width 2s ease; /* Smooth width transitions */
+      }
+
+      .progress-bg h3 {
+        font-family: Arial, sans-serif;
+        font-size: 2em;
+        font-weight: 600;
+        line-height: 78px;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        display: inline;
+      }
+
+      .progress-bg h3.raised {
+        color: #fff;
+        margin: 14px 25px 0 50px;
+        padding: 0 25px 0 0;
+      }
+
+      .progress-bg h3.goal {
+        color: #b2b2b2;
+        float: right;
+        display: inline;
+        padding: 0 25px 0 0;
+      }
+    </style>
+</head>
+<body>
+    <div class="progress-bg">
+        <div id="progress-bar" class="progress-bar">
+            <h3 class="raised">$100,000&nbsp;raised</h3>
+        </div>
+        <h3 class="goal">Goal: $100,000</h3>
+    </div>
+
+    <script>
+      function setProgress(amountRaised, goalAmount) {
+        const progressBar = document.getElementById('progress-bar');
+        const progressPercentage = (amountRaised / goalAmount) * 100;
+
+        // Make sure to remove any previous width animations
+        progressBar.style.transition = 'none'; // Disable transition temporarily
+        progressBar.style.width = progressPercentage + '%';
+        progressBar.style.transition = 'width 2s ease'; // Re-enable transition
+
+        // Update the raised amount text
+        const raisedElement = progressBar.querySelector('.raised');
+        raisedElement.textContent = `$${amountRaised.toLocaleString()} raised`;
+      }
+      
+      // Example usage
+      document.addEventListener('DOMContentLoaded', () => {
+        setProgress(parseInt(document.getElementById("money").innerHTML), 100000); // This will set the progress to 50%
+      });
+    </script>
+</body>
+</html>

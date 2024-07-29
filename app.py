@@ -34,10 +34,10 @@ def signup():
 	else:
 		email = request.form['email']
 		password = request.form['password']
-		full_name = request.form['full_name']
 		login_session['user'] = auth.create_user_with_email_and_password(email, password)
 		user_id = login_session['user']['localId']
-		#db.child("users").child(user_id).set(user)
+		db.child('donates').set(0)
+
 		return redirect(url_for('home'))
 
 
@@ -57,6 +57,25 @@ def home():
 	if request.method=="GET":
 		return render_template("index.html")
 
+
+@app.route('/donate',methods = ["GET","POST"])
+def donate():
+	if request.method=="GET":
+		return render_template("donate.html")
+	else:
+		full_name = request.form['full_name']
+		donate = request.form['donate']
+		user = {'full_name':full_name, 'donate':donate}
+		db.child("users").child(user_id).set(user)
+		
+		return redirect(url_for('bar'))
+
+@app .route('/bar')
+def bar():
+	real_donate = db.child('donates').get().val()
+	db.child('donates').set(real_donate+donate)
+	bar_donate = db.child('donates').get().val()
+	return render_template('bar.html',bar_donate = bar_donate)
 
 if __name__ == '__main__':
     app.run(debug=True)
