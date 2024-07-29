@@ -65,6 +65,7 @@ def donate():
 	else:
 		full_name = request.form['full_name']
 		donate = request.form['donate']
+		dis = request.form['dis']
 		user = {'full_name':full_name, 'donate':donate}
 		db.child("users").child(user_id).set(user)
 		
