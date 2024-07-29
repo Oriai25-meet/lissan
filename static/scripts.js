@@ -77,11 +77,8 @@ class Card extends HTMLElement {
         </div>
         <div class='flex gap-4 justify-around px-8 pt-4 w-full'>
             <p class='text-sm text-gray-400 dark:text-gray-500 flex flex-col items-center'><span class='mb-1 text-xl font-medium dark:text-gray-900'>${
-                this.getAttribute("followers") ?? "0"
-            }</span> Followers</p>
-            <p class='text-sm text-gray-400 dark:text-gray-500 flex flex-col items-center'><span class='mb-1 text-xl font-medium dark:text-gray-900'>${
-                this.getAttribute("following") ?? "0"
-            }</span> Following</p>
+                this.getAttribute("donations") ?? "0"
+            }</span> Donations</p>
         </div>
         <ul class='absolute flex gap-6 -bottom-4'>
             <li class='w-10 h-10 bg-sky-600 rounded-full grid place-items-center' title='Email'><svg viewBox="0 0 512 512" width="20" title="envelope" fill='white'>
@@ -96,3 +93,4 @@ class Card extends HTMLElement {
 }
 
 window.customElements.define("profile-card", Card);
+
