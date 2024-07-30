@@ -60,6 +60,13 @@ def home():
 		return render_template("index.html")
 
 
+
+@app.route("/signout", methods=["POST","GET"])
+def signout():
+	if request.method == "GET":
+		return redirect(url_for('signin'))
+
+
 @app.route('/donate',methods = ["GET","POST"])
 def donate():
 	if request.method=="GET":
