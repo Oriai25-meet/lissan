@@ -1,14 +1,27 @@
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Progress Bar</title>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+      <title>Progress Bar</title>
     <p id  = 'money' hidden>{{bar_donate}}</p>
     <style>
       body {
-        padding: 50px;  
+        padding: 50px;
+        background-image: url('/static/sc.png'); 
       }
 
       .progress-bg {
@@ -46,28 +59,50 @@
       }
 
       .progress-bg h3.raised {
-        color: #fff;
+        color: #D8BFD8;
         margin: 14px 25px 0 50px;
         padding: 0 25px 0 0;
       }
 
       .progress-bg h3.goal {
-        color: #b2b2b2;
+        color: black;
         float: right;
         display: inline;
         padding: 0 25px 0 0;
       }
     </style>
-</head>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 <body>
+  <center>
     <div class="progress-bg">
         <div id="progress-bar" class="progress-bar">
             <h3 class="raised">$5,000&nbsp;raised</h3>
         </div>
         <h3 class="goal">Goal: $5,000</h3>
     </div>
+    <br>
+    <a style="color: white;" href = "/home" class="w3-bar-item w3-button"> return to home </a>
+    <br>
+    <a style="color: white;" href="/signout"  class="w3-bar-item w3-button">sign out</a>
+    </center>
+</body>
 
-    <script>
+
+
+
+<script>
       function setProgress(amountRaised, goalAmount) {
         const progressBar = document.getElementById('progress-bar');
         const progressPercentage = (amountRaised / goalAmount) * 100;
@@ -87,5 +122,4 @@
         setProgress(parseInt(document.getElementById("money").innerHTML), 5000); // This will set the progress to 50%
       });
     </script>
-</body>
 </html>
